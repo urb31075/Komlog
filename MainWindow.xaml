@@ -18,8 +18,8 @@
                     <Button Content="Старт" Height="23" Margin="331,8,0,0" x:Name="StartButton" VerticalAlignment="Top" Click="StartButtonClick" IsEnabled="False" HorizontalAlignment="Left" Width="60" />
                     <Button Content="Стоп" Height="23" HorizontalAlignment="Left" Margin="398,8,0,0" x:Name="StopButton" VerticalAlignment="Top" Width="60" Click="StopButtonClick" IsEnabled="False" />
                     <RadioButton Name ="RAWRadioButton" Content="RAW" HorizontalAlignment="Left" Margin="470,8,0,0" VerticalAlignment="Top" Click="PointRViewModeRadioButtonClick"/>
-                    <RadioButton Name ="AFRadioButton"  Content="AF"  HorizontalAlignment="Left" Margin="530,8,0,0" VerticalAlignment="Top" Click="PointRViewModeRadioButtonClick"/>
-                    <RadioButton Name ="NNRadioButton"  Content="NN"  HorizontalAlignment="Left" Margin="581,8,0,0" VerticalAlignment="Top" Click="PointRViewModeRadioButtonClick" IsChecked="True"/>
+                    <RadioButton Name ="AFRadioButton"  Content="AF"  HorizontalAlignment="Left" Margin="530,8,0,0" VerticalAlignment="Top" Click="PointRViewModeRadioButtonClick" IsChecked="True"/>
+                    <RadioButton Name ="NNRadioButton"  Content="NN"  HorizontalAlignment="Left" Margin="581,8,0,0" VerticalAlignment="Top" Click="PointRViewModeRadioButtonClick"/>
                     <RadioButton Name ="PlanBRadioButton"  Content="PlanB"  HorizontalAlignment="Left" Margin="629,8,0,0" VerticalAlignment="Top" Click="PointRViewModeRadioButtonClick"/>
                     <Image x:Name="MyImage" Margin="0,3,5,0" Source="Images/Flag.png" Stretch="Fill" HorizontalAlignment="Right" Width="60" Height="30" VerticalAlignment="Top"/>
                     <dxga:StateIndicatorControl Margin="3,5,0,0" Name="KomlogStateIndicatorControl" SnapsToDevicePixels="True" StateIndex="0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30">
@@ -203,8 +203,8 @@
                     </dxlc:GroupBox>
                     <dxlc:GroupBox Header="Сценарий" x:Name="DataGroupBox_Copy"  HorizontalAlignment="Right" Margin="0,304,4,140" Width="192" Padding="2">
                         <Grid x:Name="grid1">
-                            <RadioButton Content="Пустой"   Name ="NoneScriptRadioButton" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="True"/>
-                            <RadioButton Content="Обучение" Name="TrainingScriptRadioButton" HorizontalAlignment="Left" Margin="5,30,0,0" VerticalAlignment="Top"/>
+                            <RadioButton Content="Пустой"   Name ="NoneScriptRadioButton" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top"/>
+                            <RadioButton Content="Обучение" Name="TrainingScriptRadioButton" HorizontalAlignment="Left" Margin="5,30,0,0" VerticalAlignment="Top" IsChecked="True"/>
                             <RadioButton Content="Посадка"  Name ="LandingScriptRadioButton" HorizontalAlignment="Left" Margin="5,55,0,0" VerticalAlignment="Top"/>
                             <Button x:Name="UdpServerButton" Content="UDP Server" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Width="166" Click="UdpServerButtonClick"/>
                             <Button x:Name="UdpSendButton" Content="UDP Send" HorizontalAlignment="Left" Margin="10,123,0,0" VerticalAlignment="Top" Width="166" Click="UdpSendButtonClick"/>

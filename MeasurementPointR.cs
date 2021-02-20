@@ -18,7 +18,6 @@ namespace Komlog
     using System.Text;
     using System.Threading;
     using DevExpress.Xpf.Core.Native;
-    using DevExpress.XtraRichEdit.Import.OpenXml;
 
     /// <summary>
     /// The measurement class.
@@ -118,7 +117,7 @@ namespace Komlog
         /// <summary>
         /// The position value.
         /// </summary>
-        private string[] positionValuePs;
+        private string[] positionValuePs_;
 
         /// <summary>
         /// The position value mb.
@@ -480,8 +479,8 @@ namespace Komlog
                         {
                             var positionServiceMessage = Encoding.UTF8.GetString(data, 0, offset)
                                 .Replace("\n", string.Empty).Replace("\r", string.Empty);
-                            this.positionValuePs = positionServiceMessage.Split(',');
-                            if (this.positionValuePs.Length == 3)
+                            this.positionValuePs_ = positionServiceMessage.Split(',');
+                            if (this.positionValuePs_.Length == 3)
                             {
                                 this.tcpPacketCountPositionService++;
                             }
@@ -547,12 +546,12 @@ namespace Komlog
 
             var sensorPosition = new double[4];
             var sensorAngle = new double[4];
-            if (this.positionValuePs != null && this.positionValuePs.Length == 3 && 
+            if (this.positionValuePs_ != null && this.positionValuePs_.Length == 3 && 
                 this.positionValueMb != null && this.positionValueMb.Length == 6)
             {
                 sensorPosition[0] = Convert.ToDouble(this.positionValueMb[2].Replace('.', ','));
-                sensorPosition[1] = Convert.ToDouble(this.positionValuePs[1].Replace('.', ','));
-                sensorPosition[2] = Convert.ToDouble(this.positionValuePs[2].Replace('.', ','));
+                sensorPosition[1] = Convert.ToDouble(this.positionValueMb[1].Replace('.', ','));
+                sensorPosition[2] = Convert.ToDouble(this.positionValueMb[0].Replace('.', ','));
 
                 for (var i = 0; i < 3; i++)
                 {
@@ -626,8 +625,8 @@ namespace Komlog
                                     }
 
                                     if (this.viewMode == PointRViewMode.NeuralNet && 
-                                        this.positionValueMb != null && this.positionValueMb.Length == 3 &&
-                                        this.positionValuePs != null && this.positionValuePs.Length == 6 &&
+                                        this.positionValuePs_ != null && this.positionValuePs_.Length == 3 &&
+                                        this.positionValueMb != null && this.positionValueMb.Length == 6 &&
                                         neuroNetValue != null && neuroNetValue.Length == 6)
                                     {
                                         var statistics = string.Empty;
@@ -678,8 +677,8 @@ namespace Komlog
                                     }
 
                                     if (this.viewMode == PointRViewMode.NeuralNet &&
-                                        this.positionValueMb != null && this.positionValueMb.Length == 3 &&
-                                        this.positionValuePs != null && this.positionValuePs.Length == 6 &&
+                                        this.positionValuePs_ != null && this.positionValuePs_.Length == 3 &&
+                                        this.positionValueMb != null && this.positionValueMb.Length == 6 &&
                                         neuroNetValue != null && neuroNetValue.Length == 6)
                                     {
                                         var statistics = string.Empty;
@@ -733,17 +732,17 @@ namespace Komlog
                             throw new ArgumentOutOfRangeException(nameof(this.viewMode), this.viewMode, null);
                     }
 
-                    if (this.positionValuePs != null && this.positionValuePs.Length == 3 &&
+                    if (this.positionValuePs_ != null && this.positionValuePs_.Length == 3 &&
                         this.positionValueMb != null && this.positionValueMb.Length == 6)
                     {
-                        var lastPositionResult = $"{this.positionValueMb[2]}, {this.positionValuePs[1]}, {this.positionValuePs[2]}";
+                        var lastPositionResult = $"{this.positionValueMb[2]}, {this.positionValueMb[1]}, {this.positionValueMb[0]}";
                         var lastAngleResult = $"{this.positionValueMb[3]}, {this.positionValueMb[4]}, {this.positionValueMb[5]}";
 
                         if (this.viewMode == PointRViewMode.AmplFasa)
                         {
                             var lastMeasureResult = $"{Frm(this.amplMovingAverage[0])}, {Frm(this.amplMovingAverage[1])}, {Frm(this.amplMovingAverage[2])}, " +
                                                     $"{Frm(this.deltaMovingAverage[0])}, {Frm(this.deltaMovingAverage[1])}, {Frm(this.deltaMovingAverage[2])}";
-                            var line = lastPositionResult + ", " + lastAngleResult + ", " + lastMeasureResult; // Для обучения NN
+                            var line = this.MeasurementCount + ", " + lastPositionResult + ", " + lastAngleResult + ", " + lastMeasureResult; // Для обучения NN
                             this.writer.WriteLine(line.Trim());
                             this.writer.Flush();
                         }
@@ -770,7 +769,8 @@ namespace Komlog
                             this.isLanding = this.LandingStateMashine();
                             break;
                         case PointRStateMashine.Training:
-                            this.NeuralNetworkTrainingStateMashine();
+                            this.MeandrStateMashine();
+                            //this.NeuralNetworkTrainingStateMashine();
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -1088,6 +1088,32 @@ namespace Komlog
             }
 
             return this.operationPart;
+        }
+
+        /// <summary>
+        /// The meandr state mashine.
+        /// </summary>
+        
+        private void MeandrStateMashine()
+        {
+            if (this.moveStep < 10)
+            {
+                var headCommand = Encoding.ASCII.GetBytes("head_closer\r\n");
+                this.netStreamMagneticBoard?.Write(headCommand, 0, headCommand.Length);
+                Thread.Sleep(1000);
+            }
+            if ((this.moveStep >= 10) && (this.moveStep < 20))
+            {
+                var headCommand = Encoding.ASCII.GetBytes("head_futher\r\n");
+                this.netStreamMagneticBoard?.Write(headCommand, 0, headCommand.Length);
+                Thread.Sleep(1000);
+            }
+
+            this.moveStep++;
+            if (this.moveStep == 20)
+            {
+                this.moveStep = 0;
+            }
         }
     }
 }
