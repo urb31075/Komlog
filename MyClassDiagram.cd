@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Komlog.App" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Komlog.MainDataSet" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAwAAAAJABAAAQAAAAIhCQBgAAABAAAEABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Komlog.MainWindow">
+    <Position X="4" Y="0.5" Width="2.25" />
+    <NestedTypes>
+      <Delegate Name="Komlog.MainWindow.NoArgDelegate" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MainWindow.xaml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Struct Name="Komlog.MainWindow.ChanelPoint" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TestClass.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="Komlog.MainWindow.VisualPoint" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>TestClass.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>DCmKJEogMBRRQDIEEECgECICCCAKERhACQAAAAkkRBA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Komlog.MeasurementClass">
+    <Position X="0.5" Y="1.5" Width="2.75" />
+    <NestedTypes>
+      <Delegate Name="Komlog.MeasurementClass.ChangeProcessValueHandler">
+        <TypeIdentifier>
+          <NewMemberFileName>MeasurementClass.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="Komlog.MeasurementClass.NewMessageHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MeasurementClass.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="Komlog.MeasurementClass.NewDataHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MeasurementClass.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Enum Name="Komlog.MeasurementClass.MessageType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>MeasurementClass.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAIAAAUAgEAAAAAAACAAAQAAAAAASCAAwAAA=</HashCode>
+      <FileName>MeasurementClass.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Komlog.Properties.Resources">
+    <Position X="7.75" Y="1.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Komlog.Properties.Settings" Collapsed="true">
+    <Position X="7.75" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

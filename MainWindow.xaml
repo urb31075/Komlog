@@ -1,0 +1,284 @@
+﻿<Window x:Class="Komlog.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Komlog 2.10" Height="720" Width="1153" WindowStartupLocation="CenterScreen" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol" Icon="/Komlog;component/Images/BillingHelper.ico" xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" FontWeight="Bold" xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges" xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit" Loaded="WindowLoaded" xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid">
+    <Grid Background="#FFAED1FD">
+        <StatusBar Margin="2,0,2,2" Name="KomlogStatusBar" Background="#FF71A5E8" Height="23" VerticalAlignment="Bottom">
+            <StatusBarItem Content= "*"          Width="50" Name="TimeStatusBarItem" />
+            <StatusBarItem Content="Сообщения:" Width="200" Name="InfoMessageStatusBarItem" />
+            <StatusBarItem Content="Измерено:"  Width="150" Name="MeasureAmountStatusBarItem"/>
+            <StatusBarItem Content="Ошибок:"    Width="150" Name="ErrorAmountStatusBarItem"/>
+            <StatusBarItem Content="Состояние:" Width="450" Name="StateStatusBarItem" HorizontalAlignment="Left" />
+        </StatusBar>
+        <dx:DXTabControl Margin="2,2,2,30" Padding="2" Grid.ColumnSpan="2">
+            <dx:DXTabItem Header="Измерение" Name="MeasurementTabItem">
+                <Grid>
+                    <Button Content="Поиск устройств" Height="23" HorizontalAlignment="Left" IsEnabled="False" Margin="42,7,0,0" Name="FindDeviceButton" VerticalAlignment="Top" Width="131" Click="FindDeviceButtonClick" />
+                    <ComboBox Height="23" HorizontalAlignment="Left" Margin="179,8,0,0" x:Name="FindedDeviceComboBox" VerticalAlignment="Top" Width="146" SelectionChanged="FindedDeviceComboBoxSelectionChanged" />
+                    <Button Content="Старт" Height="23" Margin="331,8,0,0" x:Name="StartButton" VerticalAlignment="Top" Click="StartButtonClick" IsEnabled="False" HorizontalAlignment="Left" Width="60" />
+                    <Button Content="Стоп" Height="23" HorizontalAlignment="Left" Margin="398,8,0,0" x:Name="StopButton" VerticalAlignment="Top" Width="60" Click="StopButtonClick" IsEnabled="False" />
+                    <RadioButton Name ="RAWRadioButton" Content="RAW" HorizontalAlignment="Left" Margin="470,8,0,0" VerticalAlignment="Top" Click="PointRViewModeRadioButtonClick"/>
+                    <RadioButton Name ="AFRadioButton"  Content="AF"  HorizontalAlignment="Left" Margin="530,8,0,0" VerticalAlignment="Top" Click="PointRViewModeRadioButtonClick"/>
+                    <RadioButton Name ="NNRadioButton"  Content="NN"  HorizontalAlignment="Left" Margin="581,8,0,0" VerticalAlignment="Top" Click="PointRViewModeRadioButtonClick" IsChecked="True"/>
+                    <RadioButton Name ="PlanBRadioButton"  Content="PlanB"  HorizontalAlignment="Left" Margin="629,8,0,0" VerticalAlignment="Top" Click="PointRViewModeRadioButtonClick"/>
+                    <Image x:Name="MyImage" Margin="0,3,5,0" Source="Images/Flag.png" Stretch="Fill" HorizontalAlignment="Right" Width="60" Height="30" VerticalAlignment="Top"/>
+                    <dxga:StateIndicatorControl Margin="3,5,0,0" Name="KomlogStateIndicatorControl" SnapsToDevicePixels="True" StateIndex="0" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30">
+                        <dxga:StateIndicatorControl.Model>
+                            <dxga:LampStateIndicatorModel />
+                        </dxga:StateIndicatorControl.Model>
+                    </dxga:StateIndicatorControl>
+                    <dxlc:GroupBox Header="График" Margin="2,36,202,2" Name="groupBox4" Padding="2" Height="Auto" Width="Auto">
+                        <Grid Name="grid6">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="180"/>
+                            </Grid.ColumnDefinitions>
+
+                            <dxc:ChartControl Grid.Row="0" Grid.Column ="0" Name="KomlogValue1ChartControl">
+                                <dxc:ChartControl.Diagram>
+                                    <dxc:XYDiagram2D Name="KomlogValue1XYDiagram2D">
+                                        <dxc:XYDiagram2D.Series>
+                                            <dxc:LineSeries2D Brush="Red" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel ConnectorVisible="False" Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                                <dxc:LineSeries2D.Points>
+                                                    <dxc:SeriesPoint Argument="1" Value="1" />
+                                                    <dxc:SeriesPoint Argument="2" Value="3" />
+                                                    <dxc:SeriesPoint Argument="3" Value="5" />
+                                                    <dxc:SeriesPoint Argument="4" Value="10" />
+                                                </dxc:LineSeries2D.Points>
+                                            </dxc:LineSeries2D>
+                                            <dxc:LineSeries2D Brush="Green" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                            </dxc:LineSeries2D>
+                                            <dxc:LineSeries2D Brush="Blue" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                            </dxc:LineSeries2D>
+                                            <dxc:LineSeries2D Brush="Magenta" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                            </dxc:LineSeries2D>
+                                            <dxc:LineSeries2D Brush="Lime" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                            </dxc:LineSeries2D>
+                                            <dxc:LineSeries2D Brush="Aqua" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                            </dxc:LineSeries2D>
+                                        </dxc:XYDiagram2D.Series>
+                                    </dxc:XYDiagram2D>
+                                </dxc:ChartControl.Diagram>
+                            </dxc:ChartControl>
+                            <dxc:ChartControl Grid.Row="1"  Grid.Column ="0" Name="KomlogValue2ChartControl">
+                                <dxc:ChartControl.Diagram>
+                                    <dxc:XYDiagram2D Name="KomlogValue2XYDiagram2D">
+                                        <dxc:XYDiagram2D.Series>
+                                            <dxc:LineSeries2D Brush="Red" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel ConnectorVisible="False" Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                                <dxc:LineSeries2D.Points>
+                                                    <dxc:SeriesPoint Argument="1" Value="1" />
+                                                    <dxc:SeriesPoint Argument="2" Value="3" />
+                                                    <dxc:SeriesPoint Argument="3" Value="5" />
+                                                    <dxc:SeriesPoint Argument="4" Value="10" />
+                                                </dxc:LineSeries2D.Points>
+                                            </dxc:LineSeries2D>
+                                            <dxc:LineSeries2D Brush="Green" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                            </dxc:LineSeries2D>
+                                            <dxc:LineSeries2D Brush="Blue" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                            </dxc:LineSeries2D>
+                                            <dxc:LineSeries2D Brush="Magenta" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                            </dxc:LineSeries2D>
+                                            <dxc:LineSeries2D Brush="Lime" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                            </dxc:LineSeries2D>
+                                            <dxc:LineSeries2D Brush="Aqua" MarkerVisible="False" ShowInLegend="False">
+                                                <dxc:LineSeries2D.Label>
+                                                    <dxc:SeriesLabel Visible="False" />
+                                                </dxc:LineSeries2D.Label>
+                                            </dxc:LineSeries2D>
+                                        </dxc:XYDiagram2D.Series>
+                                    </dxc:XYDiagram2D>
+                                </dxc:ChartControl.Diagram>
+                            </dxc:ChartControl>
+
+                            <dxlc:GroupBox Grid.Row="0" x:Name="Channel1GroupBox" Header="Каналы" Margin="10,0,0,0"  VerticalAlignment="Top" Height="235" Padding="2" Grid.Column="1" Grid.ColumnSpan="2">
+                                <Grid Name="grid51">
+                                    <Button Content="Выбрать все" FontSize="10" Height="19" IsEnabled="True" Margin="5,146,0,0" Name="SelectAllChanelButton1" VerticalAlignment="Top" Click="SelectAllChanelButtonClick1"/>
+                                    <Button Content="Сбросить все" FontSize="10" Height="19" IsEnabled="True" Margin="5,167,0,0" Name="DeselectAllChanelButton1" VerticalAlignment="Top" Click="DeselectAllChanelButtonClick1"/>
+                                    <Button Content="Инвертировать" FontSize="10" Height="19" IsEnabled="True" Margin="5,188,0,0" Name="InvertChanelButton1" VerticalAlignment="Top" Click="InvertChanelButtonClick1"/>
+                                    <CheckBox Content="1 канал" FontWeight="Bold" Foreground="Red"   Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,1,0,0"    Name="Chanel1CheckBox1" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" />
+                                    <CheckBox Content="2 канал" FontWeight="Bold" Foreground="Green" Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,26,0,0"   Name="Chanel2CheckBox1" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" />
+                                    <CheckBox Content="3 канал" FontWeight="Bold" Foreground="Blue"  Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,51,0,0"   Name="Chanel3CheckBox1" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" />
+                                    <CheckBox Content="4 канал" FontWeight="Bold" Foreground="Magenta" Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,77,0,0" Name="Chanel4CheckBox1" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" />
+                                    <CheckBox Content="5 канал" FontWeight="Bold" Foreground="Lime"  Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,101,0,0"  Name="Chanel5CheckBox1" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" />
+                                    <CheckBox Content="6 канал" FontWeight="Bold" Foreground="Aqua" Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,124,0,0"   Name="Chanel6CheckBox1" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" />
+                                </Grid>
+                            </dxlc:GroupBox>
+                            <dxlc:GroupBox Grid.Row="1" x:Name="Channel2GroupBox" Header="Каналы" Margin="10,0,0,0"  VerticalAlignment="Top" Height="234" Padding="2" Grid.Column="1" Grid.ColumnSpan="2">
+                                <Grid Name="grid52">
+                                    <Button Content="Выбрать все" FontSize="10" Height="19" IsEnabled="True" Margin="5,146,0,0" Name="SelectAllChanelButton2" VerticalAlignment="Top" Click="SelectAllChanelButtonClick2"/>
+                                    <Button Content="Сбросить все" FontSize="10" Height="19" IsEnabled="True" Margin="5,167,0,0" Name="DeselectAllChanelButton2" VerticalAlignment="Top" Click="DeselectAllChanelButtonClick2"/>
+                                    <Button Content="Инвертировать" FontSize="10" Height="19" IsEnabled="True" Margin="5,188,0,0" Name="InvertChanelButton2" VerticalAlignment="Top" Click="InvertChanelButtonClick2"/>
+                                    <CheckBox Content="1 канал" FontWeight="Bold" Foreground="Red"   Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,1,0,0"    Name="Chanel1CheckBox2" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" Width="150" Grid.ColumnSpan="2" />
+                                    <CheckBox Content="2 канал" FontWeight="Bold" Foreground="Green" Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,26,0,0"   Name="Chanel2CheckBox2" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" Width="150" Grid.ColumnSpan="2" />
+                                    <CheckBox Content="3 канал" FontWeight="Bold" Foreground="Blue"  Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,51,0,0"   Name="Chanel3CheckBox2" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" Width="150" Grid.ColumnSpan="2" />
+                                    <CheckBox Content="4 канал" FontWeight="Bold" Foreground="Magenta" Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,77,0,0" Name="Chanel4CheckBox2" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" Width="150" Grid.ColumnSpan="2" />
+                                    <CheckBox Content="5 канал" FontWeight="Bold" Foreground="Lime"  Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,101,0,0"  Name="Chanel5CheckBox2" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" Width="150" Grid.ColumnSpan="2" />
+                                    <CheckBox Content="6 канал" FontWeight="Bold" Foreground="Aqua" Height="25" HorizontalAlignment="Left" IsChecked="True" IsEnabled="True" Margin="7,124,0,0"   Name="Chanel6CheckBox2" VerticalAlignment="Top" Click="SetChanelVisibleCheckBoxClick" Width="150" Grid.ColumnSpan="2" />
+                                </Grid>
+                            </dxlc:GroupBox>
+                        </Grid>
+                    </dxlc:GroupBox>
+                    <dxlc:GroupBox Header="Показания" x:Name="DataGroupBox"  HorizontalAlignment="Right" Margin="0,113,5,331" Width="192" Padding="2">
+                        <Grid Name="grid7">
+                            <TextBox Height="21" IsReadOnly="True" Margin="5,5, 27,0" Name="GaugeTextBox1" VerticalAlignment="Top" TextAlignment="Left" Text="xxx xxx" />
+                            <TextBox Height="21" IsReadOnly="True" Margin="5,30,27,0" Name="GaugeTextBox2" VerticalAlignment="Top" TextAlignment="Left" />
+                            <TextBox Height="21" IsReadOnly="True" Margin="5,55,27,0" Name="GaugeTextBox3" VerticalAlignment="Top" TextAlignment="Left" />
+                            <TextBox Height="21" IsReadOnly="True" Margin="5,80,27,0" Name="GaugeTextBox4" VerticalAlignment="Top" TextAlignment="Left" />
+                            <TextBox Height="21" IsReadOnly="True" Margin="5,105,27,0" Name="GaugeTextBox5" VerticalAlignment="Top" TextAlignment="Left" />
+                            <TextBox Height="21" IsReadOnly="True" Margin="5,130,27,0" Name="GaugeTextBox6" VerticalAlignment="Top" TextAlignment="Left" />
+                            <dxga:StateIndicatorControl Height="23" HorizontalAlignment="Right" Margin="0,5,2,0" Name="HeatIndicatorControl1" SnapsToDevicePixels="True" StateIndex="0" VerticalAlignment="Top" Width="23">
+                                <dxga:StateIndicatorControl.Model>
+                                    <dxga:LampStateIndicatorModel />
+                                </dxga:StateIndicatorControl.Model>
+                            </dxga:StateIndicatorControl>
+                            <dxga:StateIndicatorControl Height="23" HorizontalAlignment="Right" Margin="0,30,2,0" Name="HeatIndicatorControl2" SnapsToDevicePixels="True" StateIndex="0" VerticalAlignment="Top" Width="23">
+                                <dxga:StateIndicatorControl.Model>
+                                    <dxga:LampStateIndicatorModel />
+                                </dxga:StateIndicatorControl.Model>
+                            </dxga:StateIndicatorControl>
+                            <dxga:StateIndicatorControl Height="23" HorizontalAlignment="Right" Margin="0,55,2,0" Name="HeatIndicatorControl3" SnapsToDevicePixels="True" StateIndex="0" VerticalAlignment="Top" Width="23">
+                                <dxga:StateIndicatorControl.Model>
+                                    <dxga:LampStateIndicatorModel />
+                                </dxga:StateIndicatorControl.Model>
+                            </dxga:StateIndicatorControl>
+                            <dxga:StateIndicatorControl Height="23" HorizontalAlignment="Right" Margin="0,80,2,0" Name="HeatIndicatorControl4" SnapsToDevicePixels="True" StateIndex="0" VerticalAlignment="Top" Width="23">
+                                <dxga:StateIndicatorControl.Model>
+                                    <dxga:LampStateIndicatorModel />
+                                </dxga:StateIndicatorControl.Model>
+                            </dxga:StateIndicatorControl>
+                            <dxga:StateIndicatorControl Height="23" HorizontalAlignment="Right" Margin="0,105,2,0" Name="HeatIndicatorControl5" SnapsToDevicePixels="True" StateIndex="0" VerticalAlignment="Top" Width="23">
+                                <dxga:StateIndicatorControl.Model>
+                                    <dxga:LampStateIndicatorModel />
+                                </dxga:StateIndicatorControl.Model>
+                            </dxga:StateIndicatorControl>
+                            <dxga:StateIndicatorControl Height="23" HorizontalAlignment="Right" Margin="0,130,2,0" Name="HeatIndicatorControl6" SnapsToDevicePixels="True" StateIndex="0" VerticalAlignment="Top" Width="23">
+                                <dxga:StateIndicatorControl.Model>
+                                    <dxga:LampStateIndicatorModel />
+                                </dxga:StateIndicatorControl.Model>
+                            </dxga:StateIndicatorControl>
+                        </Grid>
+                    </dxlc:GroupBox>
+                    <dxlc:GroupBox Header="Результаты" x:Name="ResultGroupBox"  HorizontalAlignment="Right" Margin="0,36,5,0" VerticalAlignment="Top" Width="192" Height="75" Padding="2">
+                        <Grid>
+                            <Button Content="Очистить" Height="23" HorizontalAlignment="Right" Margin="0,1,0,0" Name="ClearDataButton" VerticalAlignment="Top" Width="186" Click="ClearDataButtonClick" IsEnabled="False" />
+                            <Button Content="Сохранить" HorizontalAlignment="Right" Margin="0,25,0,0" Name="SaveButton" Width="186" IsEnabled="False" Click="SaveButtonClick" />
+                        </Grid>
+                    </dxlc:GroupBox>
+                    <dxlc:GroupBox Header="Сценарий" x:Name="DataGroupBox_Copy"  HorizontalAlignment="Right" Margin="0,304,4,140" Width="192" Padding="2">
+                        <Grid x:Name="grid1">
+                            <RadioButton Content="Пустой"   Name ="NoneScriptRadioButton" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                            <RadioButton Content="Обучение" Name="TrainingScriptRadioButton" HorizontalAlignment="Left" Margin="5,30,0,0" VerticalAlignment="Top"/>
+                            <RadioButton Content="Посадка"  Name ="LandingScriptRadioButton" HorizontalAlignment="Left" Margin="5,55,0,0" VerticalAlignment="Top"/>
+                            <Button x:Name="UdpServerButton" Content="UDP Server" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Width="166" Click="UdpServerButtonClick"/>
+                            <Button x:Name="UdpSendButton" Content="UDP Send" HorizontalAlignment="Left" Margin="10,123,0,0" VerticalAlignment="Top" Width="166" Click="UdpSendButtonClick"/>
+
+                        </Grid>
+                    </dxlc:GroupBox>
+
+                </Grid>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="Настройки" Name="SetupTabItem">
+                <Grid>
+                    <dxlc:GroupBox Header="Параметры фильтра записи результата" HorizontalAlignment="Left" Margin="4,6,0,0" Padding="2" Width="429" Height="560" VerticalAlignment="Top">
+                        <Grid Name="Grid8">
+                            <Label Content="%" Height="28" HorizontalAlignment="Left" Margin="392,52,0,0" Name="label13" VerticalAlignment="Top" IsEnabled="False" />
+                        </Grid>
+                    </dxlc:GroupBox>
+                    <dxlc:GroupBox Header="Лог измерений" Margin="438,6,2,0" Name="MeasurementLogGroupBox" Padding="2" Height="560" VerticalAlignment="Top">
+                        <Grid>
+                            <dxg:GridControl Name="LogGridControl" AutoGenerateColumns="AddNew" EnableSmartColumnsGeneration="True" Margin="2" >
+                                <dxg:GridControl.View>
+                                    <dxg:TableView Name="LogTableView" ShowGroupPanel="False" ShowIndicator="False" AllowEditing="False" AllowFilterEditor="False" AllowMoveColumnToDropArea="False" AllowColumnMoving="False" Focusable="False" FadeSelectionOnLostFocus="False" IsTabStop="False" UseIndicatorForSelection="False" />
+                                </dxg:GridControl.View>
+                            </dxg:GridControl>
+                        </Grid>
+                    </dxlc:GroupBox>
+                </Grid>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="Калибровка" Name="CalibrationTabItem" Height="22" VerticalAlignment="Top">
+                <Grid Margin="10,0,0,0">
+                </Grid>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="Журнал" Name="LogTabItem">
+                <Grid>
+                    <dxlc:GroupBox Header="Журнал" Height="Auto" Margin="2" Padding="2" Width="Auto">
+                        <Grid>
+                            <ListBox Margin="2,2,0,27" Name="LogListBox" HorizontalAlignment="Stretch" />
+                            <Button Click="ClearLogButtonClick" Content="Очистить" Height="23" HorizontalAlignment="Right" Margin="0,0,2,0" Name="ClearLogButton" VerticalAlignment="Bottom" Width="114"  />
+                            <Button Click="SaveLogButtonClick" Content="Сохранить" Height="23" HorizontalAlignment="Right" Margin="0,0,121,0" Name="SaveLogButton" VerticalAlignment="Bottom" Width="123" />
+                        </Grid>
+                    </dxlc:GroupBox>
+                </Grid>
+            </dx:DXTabItem>
+            <dx:DXTabItem Header="Отладка" Name="DebugTabItem">
+                <Grid  Margin="10,0,0,0">
+                    <dxlc:GroupBox Header="Команды" HorizontalAlignment="Left" Name="CommandGroupBox" VerticalAlignment="Top" Height="396" Width="189" Padding="2" Margin="0,10,0,0">
+                        <Grid Margin="0,0,0,0">
+                            <Button Content="Обновить" Height="25" Margin="7,4,80,0" Name="RefreshCommCommandButton" VerticalAlignment="Top" Click="RefreshCommCommandButtonClick"/>
+                            <ComboBox Height="25" Margin="108,4,6,0" x:Name="ComPortComboBox" VerticalAlignment="Top" SelectionChanged="FindedDeviceComboBoxSelectionChanged" />
+                            <RadioButton Content="Пустая команда" Height="25" HorizontalAlignment="Left" Margin="6,30,0,0" x:Name="EmptyCommandRadioButton" VerticalAlignment="Top" Width="250" />
+                            <RadioButton Content="Получить версию ПО" Height="25" HorizontalAlignment="Left" Margin="6,50,0,0" x:Name="GetVersionCommandRadioButton" VerticalAlignment="Top" Width="250" />
+                            <RadioButton Content="Получить данные" Height="25" HorizontalAlignment="Left" Margin="6,70,0,0" Name="GetSingleDataRadioButton" VerticalAlignment="Top" Width="250" />
+                            <RadioButton Content="Запустить измерения" Height="25" HorizontalAlignment="Left" Margin="6,90,0,0" Name="StartDataStreamRadioButton" VerticalAlignment="Top" Width="250" />
+                            <RadioButton Content="Остановить измерения" Height="25" HorizontalAlignment="Left" Margin="6,110,0,0" Name="StopDataStreamRadioButton" VerticalAlignment="Top" Width="250" />
+                            <RadioButton Content="Установить ключи" Height="25" HorizontalAlignment="Left" Margin="6,130,0,0" Name="SetKeyRadioButton" VerticalAlignment="Top" Width="250" />
+                            <RadioButton Content="Получить DAC" Height="25" HorizontalAlignment="Left" Margin="6,150,0,0" Name="GetDacRadioButton" VerticalAlignment="Top" Width="250" />
+                            <RadioButton Content="Установить DAC" Height="25" HorizontalAlignment="Left" Margin="6,170,0,0" Name="SetDacRadioButton" VerticalAlignment="Top" Width="250" />
+                            <RadioButton Content="TestPointR"    Height="25" HorizontalAlignment="Left" Margin="6,200,0,0" x:Name="TestPointRRadioButton" VerticalAlignment="Top" Width="250" />
+                            <RadioButton Content="GetDumpPointR" Height="25" HorizontalAlignment="Left" Margin="6,220,0,0" x:Name="GetDumpPointRRadioButton" VerticalAlignment="Top" Width="250" />
+                            <RadioButton Content="GetDataPointR" Height="25" HorizontalAlignment="Left" Margin="6,240,0,0" x:Name="GetDataPointRRadioButton" VerticalAlignment="Top" Width="250" />
+                            <Button Content="Послать команду" Height="25" Margin="6,0,6,75" Name="SendCommandButton" VerticalAlignment="Bottom" Click="SendCommandButtonClick"/>
+                            <Button Content="TCP Open"  Height="25" Margin="6,0,6,35" Name="OpenTCPCommandButton" VerticalAlignment="Bottom" Click="OpenTcpCommandButtonClick"/>
+                            <Button Content="TCP Close" Height="25" Margin="6,0,6,6" Name="CloseTCPCommandButton" VerticalAlignment="Bottom" Click="CloseTcpCommandButtonClick" IsEnabled="False"/>
+                        </Grid>
+                    </dxlc:GroupBox>
+                    <dxlc:GroupBox Header="Сообщения" Margin="194,10,2,2" Name="groupBox2" Padding="2" Height="Auto">
+                        <Grid>
+                            <ListBox Margin="2,2,3,31" x:Name="DebugMessageListBox" Width="Auto" />
+                            <Button Content="Очистить" HorizontalAlignment="Right" Margin="0,0,5,3" x:Name="ClearDebugMessageButton" Width="100" Height="23" VerticalAlignment="Bottom" Click="ClearDebugMessageButtonClick" />
+                            <Button Content="Сохранить" Height="23" HorizontalAlignment="Right" Margin="0,0,109,3" x:Name="SaveDebugMessageButton" VerticalAlignment="Bottom" Width="100" Click="SaveDebugMessageButtonClick" />
+                        </Grid>
+                    </dxlc:GroupBox>
+
+                </Grid>
+            </dx:DXTabItem>
+        </dx:DXTabControl>
+    </Grid>
+</Window>

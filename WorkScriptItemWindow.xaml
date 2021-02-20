@@ -1,0 +1,24 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="Komlog.WorkScriptItemWindow"
+        Title="Элемент сценария" Height="183" Width="313" FontWeight="Bold" Icon="Images/BillingHelper.ico" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+    <Grid  Background="#FFAED1FD">
+        <ComboBox x:Name="DeviceComboBox" SelectedIndex="1" HorizontalAlignment="Left" Margin="106,8,0,0" VerticalAlignment="Top" Width="115">
+            <ListBoxItem Content="Компрессор"/>
+            <ListBoxItem Content="Нагреватель"/>
+        </ComboBox>
+        <Button x:Name="AbplayButton" Content="Применить" Height="23" Margin="3,0,0,3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75" Click="AbbplayButtonClick"/>
+        <Button x:Name="CancelButton" Content="Отмена" Height="23" Margin="82,0,0,3" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="75" Click="CancelButtonClick"/>
+        <dxe:SpinEdit x:Name="OnTimeSpinEdit" HorizontalAlignment="Left" Margin="106,60,0,0" VerticalAlignment="Top" Width="115" IsFloatValue="True" EditValue ="1"  MaxValue="1000" MinValue="0" Increment="0.1" DisplayFormatString="N1" />
+        <dxe:SpinEdit x:Name="OffTimeSpinEdit" HorizontalAlignment="Left" Margin="106,86,0,0" VerticalAlignment="Top" Width="115" IsFloatValue="True" EditValue ="2" MaxValue="1000" MinValue="0" Increment="0.1" DisplayFormatString="N1" />
+        <dxe:SpinEdit x:Name="ChanelSpinEdit" HorizontalAlignment="Left" Margin="106,34,0,0" VerticalAlignment="Top" Width="115" IsFloatValue="False" MinValue="1" EditValue="1" MaxValue="8"/>
+        <Label Content="Устройство" HorizontalAlignment="Left" Margin="2,4,0,0" VerticalAlignment="Top"/>
+        <Label Content="Канал" HorizontalAlignment="Left" Margin="2,32,0,0" VerticalAlignment="Top"/>
+        <Label Content="Включить на" HorizontalAlignment="Left" Margin="2,58,0,0" VerticalAlignment="Top"/>
+        <Label Content="Выключить на" HorizontalAlignment="Left" Margin="2,84,0,0" VerticalAlignment="Top"/>
+        <Label Content="секунде" HorizontalAlignment="Left" Margin="228,58,0,0" VerticalAlignment="Top"/>
+        <Label Content="секунде" HorizontalAlignment="Left" Margin="228,84,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
